@@ -5,6 +5,7 @@ import Pages.ProductsPage;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -27,7 +28,9 @@ public class SeleniumTest {
 
     @BeforeSuite
     public static void setup() throws InterruptedException {
+        WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
+        driver.manage().window().maximize();
         driver.get("https://anupdamoda.github.io/AceOnlineShoePortal/index.html");
         ExtentSparkReporter spark = new ExtentSparkReporter("target/spark.html");
         extent.attachReporter(spark);
